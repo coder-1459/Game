@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16 Parchi Thapp - Multiplayer Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Main Menu -->
+        <div id="mainMenu" class="menu-screen">
+            <div class="menu-content">
+                <h1 class="game-title">16 Parchi Thapp</h1>
+                <p class="game-subtitle">Collect 4 cards of the same fruit to win!</p>
+                
+                <div class="menu-buttons">
+                    <button id="createGameBtn" class="btn btn-primary">Create New Game</button>
+                    <button id="joinGameBtn" class="btn btn-secondary">Join Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Game Screen -->
+        <div id="createGameScreen" class="menu-screen hidden">
+            <div class="menu-content">
+                <h2>Create New Game</h2>
+                <div class="room-info">
+                    <p>Share this code with 3 other players:</p>
+                    <div class="room-code" id="roomCode">Generating...</div>
+                    <button id="copyCodeBtn" class="btn btn-small">Copy Code</button>
+                </div>
+                <div class="players-waiting">
+                    <h3>Waiting for players...</h3>
+                    <div class="player-list" id="playerList">
+                        <div class="player-item">
+                            <span class="player-name">You (Host)</span>
+                            <span class="player-status ready">Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="refreshBtn" class="btn btn-small" style="margin-bottom: 1rem;">Refresh Player List</button>
+                <button id="startGameBtn" class="btn btn-primary" disabled>Start Game (Need 4 Players)</button>
+                <button id="backToMenuBtn" class="btn btn-secondary">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Join Game Screen -->
+        <div id="joinGameScreen" class="menu-screen hidden">
+            <div class="menu-content">
+                <h2>Join Game</h2>
+                <div class="join-form">
+                    <input type="text" id="joinCodeInput" placeholder="Enter 4-digit game code" maxlength="4" class="code-input">
+                    <button id="joinWithCodeBtn" class="btn btn-primary">Join Game</button>
+                </div>
+                <button id="backToMenuBtn2" class="btn btn-secondary">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="game-screen hidden">
+            <div class="game-header">
+                <div class="game-info">
+                    <h2>16 Parchi Thapp</h2>
+                    <div class="room-code-small" id="gameRoomCode"></div>
+                </div>
+                <div class="game-status" id="gameStatus">Waiting for players...</div>
+            </div>
+
+            <div class="game-board">
+                <!-- Other Players -->
+                <div class="other-players">
+                    <div class="player-slot" id="player1">
+                        <div class="player-avatar">P1</div>
+                        <div class="player-name">Player 1</div>
+                        <div class="card-count">4 cards</div>
+                    </div>
+                    <div class="player-slot" id="player2">
+                        <div class="player-avatar">P2</div>
+                        <div class="player-name">Player 2</div>
+                        <div class="card-count">4 cards</div>
+                    </div>
+                    <div class="player-slot" id="player3">
+                        <div class="player-avatar">P3</div>
+                        <div class="player-name">Player 3</div>
+                        <div class="card-count">4 cards</div>
+                    </div>
+                </div>
+
+                <!-- Center Area -->
+                <div class="center-area">
+                    <div class="game-message" id="gameMessage">Waiting for all players...</div>
+                    <div class="pass-area" id="passArea">
+                        <div class="pass-instruction">Select a card to pass to another player</div>
+                        <div class="pass-buttons">
+                            <button id="passToNextBtn" class="btn btn-primary" style="margin-bottom: 1rem;">Pass to Next Person</button>
+                            <div class="target-players" id="targetPlayers"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Player's Cards -->
+                <div class="player-cards">
+                    <h3>Your Cards</h3>
+                    <div class="card-count-display" style="text-align: center; margin-bottom: 1rem; font-weight: 600; color: #667eea;"></div>
+                    <div class="cards-container" id="playerCards"></div>
+                </div>
+            </div>
+
+            <button id="leaveGameBtn" class="btn btn-secondary">Leave Game</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="menu-screen hidden">
+            <div class="menu-content">
+                <h2 id="gameResult">Game Over</h2>
+                <div class="winner-info" id="winnerInfo"></div>
+                <div class="final-scores" id="finalScores"></div>
+                <button id="playAgainBtn" class="btn btn-primary">Play Again</button>
+                <button id="backToMenuBtn3" class="btn btn-secondary">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingText">Connecting...</p>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
